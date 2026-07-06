@@ -11,27 +11,27 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(AbstractContainerScreen.class)
+@Mixin(value = AbstractContainerScreen.class, remap = false)
 public abstract class AbstractContainerScreenMixin {
-  @Shadow protected Slot hoveredSlot;
+  @Shadow(remap = false) protected Slot f_97734_;
 
-  @Inject(method = "mouseClicked", at = @At("HEAD"), cancellable = true)
+  @Inject(method = "m_6375_", at = @At("HEAD"), cancellable = true, remap = false)
   private void stack64taker$take64WithModifier(double mouseX, double mouseY, int button, CallbackInfoReturnable<Boolean> cir) {
-    if (button != 0 || !Stack64TakerKeyMappings.TAKE_64_MODIFIER.isDown()) {
+    if (button != 0 || !Stack64TakerKeyMappings.isTake64ModifierDown()) {
       return;
     }
 
-    Slot slot = this.hoveredSlot;
-    Minecraft minecraft = Minecraft.getInstance();
-    if (minecraft.player == null || slot == null || !slot.hasItem() || slot.getItem().getCount() <= 64) {
+    Slot slot = this.f_97734_;
+    Minecraft minecraft = Minecraft.m_91087_();
+    if (minecraft.f_91074_ == null || slot == null || !slot.m_6657_() || slot.m_7993_().m_41613_() <= 64) {
       return;
     }
 
-    if (!minecraft.player.containerMenu.getCarried().isEmpty()) {
+    if (!minecraft.f_91074_.f_36096_.m_142621_().m_41619_()) {
       return;
     }
 
-    Stack64Taker.sendTake64Request(slot.index);
+    Stack64Taker.sendTake64Request(slot.f_40219_);
     cir.setReturnValue(true);
   }
 }
