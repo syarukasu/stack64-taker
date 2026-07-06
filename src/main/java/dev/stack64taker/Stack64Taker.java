@@ -62,33 +62,33 @@ public final class Stack64Taker {
         return;
       }
 
-      AbstractContainerMenu menu = player.f_36096_;
-      if (menuSlotIndex < 0 || menuSlotIndex >= menu.f_38839_.size()) {
+      AbstractContainerMenu menu = player.containerMenu;
+      if (menuSlotIndex < 0 || menuSlotIndex >= menu.slots.size()) {
         return;
       }
 
-      if (!menu.m_142621_().m_41619_()) {
+      if (!menu.getCarried().isEmpty()) {
         return;
       }
 
-      Slot slot = menu.m_38853_(menuSlotIndex);
-      if (!slot.m_8010_(player) || !slot.m_6657_()) {
+      Slot slot = menu.getSlot(menuSlotIndex);
+      if (!slot.mayPickup(player) || !slot.hasItem()) {
         return;
       }
 
-      ItemStack source = slot.m_7993_();
-      if (source.m_41613_() <= 64) {
+      ItemStack source = slot.getItem();
+      if (source.getCount() <= 64) {
         return;
       }
 
-      ItemStack taken = slot.m_6201_(64);
-      if (taken.m_41619_()) {
+      ItemStack taken = slot.remove(64);
+      if (taken.isEmpty()) {
         return;
       }
 
-      menu.m_142503_(taken);
-      slot.m_6654_();
-      menu.m_38946_();
+      menu.setCarried(taken);
+      slot.setChanged();
+      menu.broadcastChanges();
     }
   }
 }

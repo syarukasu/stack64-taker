@@ -2,7 +2,7 @@
 
 Stack64 Taker adds a small inventory shortcut for Minecraft Forge 1.20.1:
 
-**Ctrl + Shift + Left Click** a slot to take exactly **64 items** from an oversized stack.
+Hold the configured **Take 64 modifier** key and left-click a slot to take exactly **64 items** from an oversized stack.
 
 This is useful in modpacks that raise item stack limits with mods such as Bigger Stacks, while still wanting an easy way to create a vanilla-sized stack.
 
@@ -12,6 +12,8 @@ This is useful in modpacks that raise item stack limits with mods such as Bigger
 - Works only on slots containing more than 64 items.
 - Takes exactly 64 items from the clicked slot and places them on the cursor.
 - Leaves normal 64-or-smaller stacks untouched.
+- The modifier key is configurable in Minecraft's key bindings screen.
+- The default modifier is Right Alt.
 - Requires both client and server installation.
 
 ## Why both sides?
@@ -27,13 +29,19 @@ The current implementation targets Forge 1.20.1 and uses runtime Minecraft metho
 ## Building
 
 ```bash
-./gradlew build
+gradle build
 ```
 
 The built jar will be in:
 
 ```text
 build/libs/
+```
+
+This repository is laid out for ForgeGradle. If you prefer the Gradle Wrapper, generate it once with a local Gradle install:
+
+```bash
+gradle wrapper
 ```
 
 ## License
