@@ -19,12 +19,6 @@ public final class Stack64TakerKeyMappings {
       GLFW.GLFW_KEY_RIGHT_ALT,
       CATEGORY
   );
-  public static final KeyMapping TAKE_64_ACTION = new KeyMapping(
-      "key.stack64_taker.take_64_action",
-      InputConstants.Type.MOUSE,
-      GLFW.GLFW_MOUSE_BUTTON_4,
-      CATEGORY
-  );
 
   private Stack64TakerKeyMappings() {
   }
@@ -47,31 +41,8 @@ public final class Stack64TakerKeyMappings {
     return TAKE_64_MODIFIER.m_90857_();
   }
 
-  public static boolean isTake64MouseAction(int button) {
-    InputConstants.Key key = TAKE_64_ACTION.m_90861_();
-    return key.m_84868_() == InputConstants.Type.MOUSE && key.m_84873_() == button;
-  }
-
-  public static boolean isTake64KeyAction(int keyCode, int scanCode) {
-    InputConstants.Key key = TAKE_64_ACTION.m_90861_();
-    if (key == InputConstants.f_84822_) {
-      return false;
-    }
-
-    if (key.m_84868_() == InputConstants.Type.KEYSYM) {
-      return key.m_84873_() == keyCode;
-    }
-
-    if (key.m_84868_() == InputConstants.Type.SCANCODE) {
-      return key.m_84873_() == scanCode;
-    }
-
-    return false;
-  }
-
   @SubscribeEvent
   public static void registerKeyMappings(RegisterKeyMappingsEvent event) {
     event.register(TAKE_64_MODIFIER);
-    event.register(TAKE_64_ACTION);
   }
 }

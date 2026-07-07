@@ -1,5 +1,4 @@
 {
   "key.categories.stack64_taker": "Stack64 Taker",
-  "key.stack64_taker.take_64_modifier": "64個取り出し修飾キー",
-  "key.stack64_taker.take_64_action": "64個取り出し"
+  "key.stack64_taker.take_64_modifier": "64個取り出し修飾キー"
 }
