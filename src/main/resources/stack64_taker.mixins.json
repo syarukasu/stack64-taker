@@ -3,8 +3,13 @@
   "minVersion": "0.8",
   "package": "dev.stack64taker.mixin",
   "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "AbstractContainerMenuClickGuardMixin",
+    "ServerClickGuardMixin"
+  ],
   "client": [
-    "AbstractContainerScreenMixin"
+    "AbstractContainerScreenMixin",
+    "Ae2VirtualSlotSafetyMixin"
   ],
   "injectors": {
     "defaultRequire": 1
