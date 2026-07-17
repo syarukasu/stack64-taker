@@ -45,6 +45,19 @@ public abstract class ServerClickGuardMixin {
 
     stack64taker$logInvalidClick(player, menu, packet, slotId, slotCount);
     ci.cancel();
+    stack64taker$resyncAuthoritativeMenu(player, menu, packet.getContainerId());
+  }
+
+  private static void stack64taker$resyncAuthoritativeMenu(
+      ServerPlayer player,
+      AbstractContainerMenu menu,
+      int containerId
+  ) {
+    player.getServer().execute(() -> {
+      if (player.containerMenu == menu && menu.containerId == containerId) {
+        menu.sendAllDataToRemote();
+      }
+    });
   }
 
   private static void stack64taker$logInvalidClick(

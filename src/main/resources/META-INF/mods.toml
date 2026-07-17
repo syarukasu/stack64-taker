@@ -7,7 +7,7 @@ config = "stack64_taker.mixins.json"
 
 [[mods]]
 modId = "stack64_taker"
-version = "1.2.6"
+version = "1.2.7"
 displayName = "Stack64 Taker"
 authors = "syarukasu, Codex"
 description = '''

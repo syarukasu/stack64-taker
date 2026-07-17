@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.2.7
+
+### Fixed
+
+- Removed the 1.2.6 client-side translation of AE2 virtual-slot clicks. AE2 once again owns all normal terminal insertion and extraction interactions.
+- Rejected invalid vanilla slot packets now trigger a full authoritative menu resynchronization, restoring the carried stack and visible slots instead of leaving client prediction stale.
+- The dedicated Stack64 AE2 amount packet remains unchanged and still uses AE2 serial keys rather than vanilla slot IDs.
+- Protocol 12 requires the same build on client and server.
+
 ## 1.2.6
 
 ### Fixed

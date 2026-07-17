@@ -3,7 +3,7 @@ plugins {
 }
 
 group = 'dev.stack64taker'
-version = '1.2.6'
+version = '1.2.7'
 
 base {
     archivesName = 'stack64-taker'
