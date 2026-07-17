@@ -22,7 +22,7 @@ public final class Stack64Taker {
   public static final String MODID = "stack64_taker";
   public static final int DEFAULT_TAKE_AMOUNT = 64;
   public static final int MAX_TAKE_AMOUNT = 1_048_576;
-  private static final String PROTOCOL = "11";
+  private static final String PROTOCOL = "12";
 
   private static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(
       new ResourceLocation(MODID, "main"),

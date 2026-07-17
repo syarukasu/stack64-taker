@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ClickType;
 import org.slf4j.Logger;
@@ -52,5 +53,19 @@ public abstract class AbstractContainerMenuClickGuardMixin {
     }
 
     ci.cancel();
+    stack64taker$resyncAuthoritativeMenu(player, menu);
+  }
+
+  private static void stack64taker$resyncAuthoritativeMenu(Player player, AbstractContainerMenu menu) {
+    if (!(player instanceof ServerPlayer serverPlayer)) {
+      return;
+    }
+
+    int containerId = menu.containerId;
+    serverPlayer.getServer().execute(() -> {
+      if (serverPlayer.containerMenu == menu && menu.containerId == containerId) {
+        menu.sendAllDataToRemote();
+      }
+    });
   }
 }

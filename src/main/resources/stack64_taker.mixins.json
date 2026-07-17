@@ -8,8 +8,7 @@
     "ServerClickGuardMixin"
   ],
   "client": [
-    "AbstractContainerScreenMixin",
-    "Ae2VirtualSlotSafetyMixin"
+    "AbstractContainerScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1
