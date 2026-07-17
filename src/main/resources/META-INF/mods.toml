@@ -2,13 +2,16 @@ modLoader = "javafml"
 loaderVersion = "[47,)"
 license = "MIT"
 
+[[mixins]]
+config = "stack64_taker.mixins.json"
+
 [[mods]]
 modId = "stack64_taker"
-version = "${file.jarVersion}"
+version = "1.2.6"
 displayName = "Stack64 Taker"
 authors = "syarukasu, Codex"
 description = '''
-Adds configurable modifier + left click support for taking exactly 64 items from oversized stacks.
+Adds configurable shortcut support for taking a chosen amount from large stacks.
 Useful with stack-size-increasing mods such as Bigger Stacks.
 '''
 

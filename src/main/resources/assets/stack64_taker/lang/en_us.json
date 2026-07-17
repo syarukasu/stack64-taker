@@ -1,4 +1,9 @@
 {
   "key.categories.stack64_taker": "Stack64 Taker",
-  "key.stack64_taker.take_64_modifier": "Take 64 modifier"
+  "key.stack64_taker.take_amount_action": "Take amount",
+  "key.stack64_taker.set_amount_action": "Set take amount",
+  "screen.stack64_taker.amount.title": "Take Amount",
+  "screen.stack64_taker.amount.input": "Take amount",
+  "screen.stack64_taker.amount.save": "Save",
+  "screen.stack64_taker.amount.hint": "Allowed range: 1 to %s. Typing replaces the current value. Press Enter or a Stack64 key to save."
 }

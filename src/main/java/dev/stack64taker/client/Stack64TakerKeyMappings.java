@@ -2,7 +2,6 @@ package dev.stack64taker.client;
 
 import com.mojang.blaze3d.platform.InputConstants;
 import dev.stack64taker.Stack64Taker;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.KeyMapping;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
@@ -14,35 +13,60 @@ import org.lwjgl.glfw.GLFW;
 public final class Stack64TakerKeyMappings {
   public static final String CATEGORY = "key.categories.stack64_taker";
 
-  public static final KeyMapping TAKE_64_MODIFIER = new KeyMapping(
-      "key.stack64_taker.take_64_modifier",
-      GLFW.GLFW_KEY_RIGHT_ALT,
+  public static final KeyMapping TAKE_AMOUNT_ACTION = new KeyMapping(
+      "key.stack64_taker.take_amount_action",
+      InputConstants.Type.MOUSE,
+      GLFW.GLFW_MOUSE_BUTTON_4,
+      CATEGORY
+  );
+  public static final KeyMapping SET_AMOUNT_ACTION = new KeyMapping(
+      "key.stack64_taker.set_amount_action",
+      InputConstants.Type.MOUSE,
+      GLFW.GLFW_MOUSE_BUTTON_5,
       CATEGORY
   );
 
   private Stack64TakerKeyMappings() {
   }
 
-  public static boolean isTake64ModifierDown() {
-    InputConstants.Key key = TAKE_64_MODIFIER.m_90861_();
-    if (key == InputConstants.f_84822_) {
+  public static boolean isTakeAmountMouseAction(int button) {
+    InputConstants.Key key = TAKE_AMOUNT_ACTION.getKey();
+    return key.getType() == InputConstants.Type.MOUSE && key.getValue() == button;
+  }
+
+  public static boolean isTakeAmountKeyAction(int keyCode, int scanCode) {
+    return isKeyAction(TAKE_AMOUNT_ACTION, keyCode, scanCode);
+  }
+
+  public static boolean isSetAmountMouseAction(int button) {
+    InputConstants.Key key = SET_AMOUNT_ACTION.getKey();
+    return key.getType() == InputConstants.Type.MOUSE && key.getValue() == button;
+  }
+
+  public static boolean isSetAmountKeyAction(int keyCode, int scanCode) {
+    return isKeyAction(SET_AMOUNT_ACTION, keyCode, scanCode);
+  }
+
+  private static boolean isKeyAction(KeyMapping mapping, int keyCode, int scanCode) {
+    InputConstants.Key key = mapping.getKey();
+    if (key == InputConstants.UNKNOWN) {
       return false;
     }
 
-    long window = Minecraft.m_91087_().m_91268_().m_85439_();
-    if (key.m_84868_() == InputConstants.Type.MOUSE) {
-      return GLFW.glfwGetMouseButton(window, key.m_84873_()) == GLFW.GLFW_PRESS;
+    if (key.getType() == InputConstants.Type.KEYSYM) {
+      return key.getValue() == keyCode;
     }
 
-    if (key.m_84868_() == InputConstants.Type.KEYSYM) {
-      return InputConstants.m_84830_(window, key.m_84873_());
+    if (key.getType() == InputConstants.Type.SCANCODE) {
+      return key.getValue() == scanCode;
     }
 
-    return TAKE_64_MODIFIER.m_90857_();
+    return false;
   }
 
   @SubscribeEvent
   public static void registerKeyMappings(RegisterKeyMappingsEvent event) {
-    event.register(TAKE_64_MODIFIER);
+    event.register(TAKE_AMOUNT_ACTION);
+    event.register(SET_AMOUNT_ACTION);
   }
 }

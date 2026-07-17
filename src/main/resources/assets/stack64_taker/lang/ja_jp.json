@@ -1,4 +1,9 @@
 {
   "key.categories.stack64_taker": "Stack64 Taker",
-  "key.stack64_taker.take_64_modifier": "64個取り出し修飾キー"
+  "key.stack64_taker.take_amount_action": "指定数取り出し",
+  "key.stack64_taker.set_amount_action": "取り出し数を設定",
+  "screen.stack64_taker.amount.title": "取り出し数設定",
+  "screen.stack64_taker.amount.input": "取り出し数",
+  "screen.stack64_taker.amount.save": "設定",
+  "screen.stack64_taker.amount.hint": "1 から %s まで。数字入力で上書き、Enter または取り出し/設定キーで確定。"
 }
