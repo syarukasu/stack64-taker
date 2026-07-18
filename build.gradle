@@ -3,7 +3,7 @@ plugins {
 }
 
 group = 'dev.stack64taker'
-version = '1.2.7'
+version = '1.2.8'
 
 base {
     archivesName = 'stack64-taker'
@@ -24,10 +24,24 @@ repositories {
 dependencies {
     minecraft 'net.minecraftforge:forge:1.20.1-47.4.20'
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+
+    testImplementation platform('org.junit:junit-bom:5.10.3')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
 }
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+processResources {
+    inputs.property 'version', project.version
+    filesMatching('META-INF/mods.toml') {
+        expand 'file': ['jarVersion': project.version]
+    }
 }
 
 jar {
