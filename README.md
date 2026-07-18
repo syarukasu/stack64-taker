@@ -1,56 +1,39 @@
 # Stack64 Taker
 
-Stack64 Taker is a tiny Forge 1.20.1 utility for modpacks that raise stack limits.
-It lets players take exactly **64 items** from oversized stacks without lowering the global stack cap.
+Stack64 Taker adds configurable inventory shortcuts for Minecraft Forge 1.20.1.
 
-## Features
+Use the configured **Take amount** key over a slot to take the selected number of items. The default is 64, and the amount can be changed with the **Set take amount** key.
 
-- Take up to 64 items from vanilla/container slots.
-- Take 64 stored items from AE2 terminal grid entries without treating virtual grid entries as container slots.
-- Configurable keybinds in Minecraft's key bindings screen.
-- Server-side inventory handling to avoid ghost items.
-- Server-side invalid slot click guard with diagnostic logging.
-
-## Controls
-
-Use either shortcut while hovering an item slot:
-
-- Press the configured **Take 64** key.
-- Or hold the configured **Take 64 modifier** key and left-click.
-
-Defaults:
-
-- **Take 64**: Mouse Button 4
-- **Take 64 modifier**: Right Alt
+This is useful in modpacks that raise item stack limits with mods such as Bigger Stacks, while still wanting an easy way to create a vanilla-sized stack.
 
 ## Behavior
 
-- Works only when the carried cursor stack is empty.
-- Normal inventory slots can contain any positive amount; the mod takes up to 64.
-- AE2 terminal grid entries use a separate shortcut packet. The server resolves the AE2 entry serial and extracts up to 64 stored items from the ME network.
+- Supports normal menu slots and AE2 storage-terminal virtual slots.
+- Supports amounts from 1 through 1,048,576.
+- Merges into a compatible stack already carried by the cursor.
+- Both shortcut actions are configurable in Minecraft's key bindings screen.
+- Retains the complete behavior of the 1.2.4 baseline.
+- Rejects stale custom requests after the player changes menus.
+- Blocks out-of-range vanilla container clicks before they reach slot lookup.
+- Performs server-side validation only on the server thread.
+- Rate-limits recovery synchronization and warning logs.
 - Requires both client and server installation.
 
-## Compatibility
+## Why both sides?
 
-This mod does not change stack sizes by itself. Pair it with a stack-size mod such as Bigger Stacks.
+The client detects the shortcut, but the server performs the actual inventory change. This avoids ghost items and keeps multiplayer inventories authoritative.
 
-AE2 terminal grid slots are virtual client slots, so Stack64 Taker never sends their client slot index as a normal container click. It sends only the AE2 entry serial through the AE2 shortcut path.
+## Compatibility Notes
 
-The invalid click guard blocks malformed container click packets where the client sends a slot index outside the server menu's slot list. When this happens, the server logs a warning like:
+This mod is intentionally tiny. It does not change stack sizes by itself. Pair it with a stack-size mod such as Bigger Stacks.
 
-```text
-Stack64Taker/ClickGuard: Blocked invalid container click: player=... menu=... slotId=... serverSlotCount=...
-```
+The current implementation targets Forge 1.20.1 and uses runtime Minecraft method names, matching Forge's production environment.
 
 ## Building
 
-Local build:
-
 ```bash
-gradle build
+gradle clean test build --no-daemon
 ```
-
-GitHub Actions also builds the jar on push, pull request, and manual workflow dispatch.
 
 The built jar will be in:
 
@@ -58,37 +41,7 @@ The built jar will be in:
 build/libs/
 ```
 
-## Release Checklist
-
-1. Update the version in:
-   - `build.gradle`
-   - `src/main/resources/META-INF/mods.toml`
-   - `src/main/resources/META-INF/MANIFEST.MF`, if present
-2. Build the jar:
-
-   ```bash
-   gradle build
-   ```
-
-3. Confirm the jar contains the required metadata:
-
-   ```bash
-   jar tf build/libs/stack64-taker-<version>.jar | grep -E "pack.mcmeta|META-INF/mods.toml|stack64_taker.mixins.json"
-   ```
-
-4. Test in a Forge 1.20.1 client and server with:
-   - a stack-size-increasing mod
-   - AE2, if releasing AE2 terminal support
-5. Commit and tag:
-
-   ```bash
-   git add .
-   git commit -m "Release <version>"
-   git tag v<version>
-   git push origin main --tags
-   ```
-
-6. Create a GitHub Release from the tag and upload the built jar.
+GitHub Actions runs the same Java 17 ForgeGradle build for pushes and pull requests.
 
 ## License
 

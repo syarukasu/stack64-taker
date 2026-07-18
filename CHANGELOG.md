@@ -1,5 +1,30 @@
 # Changelog
 
+## 1.2.8
+
+### Fixed
+
+- Rebased the shortcut behavior on the stable 1.2.4 interaction model while
+  retaining configurable extraction amounts, normal slots, and AE2 virtual
+  terminal entries.
+- Added the active container ID to Stack64 custom requests so packets queued
+  for an already closed menu are rejected instead of affecting the next menu.
+- Rejected only non-negative vanilla click indices outside the authoritative
+  menu slot list, before any slot lookup occurs.
+- Kept server-menu validation on the server thread and added a final menu
+  boundary guard for non-packet callers.
+- Limited full menu recovery synchronization to once per second and diagnostic
+  warnings to once per 30 seconds per connection.
+
+### Safety
+
+- Negative vanilla sentinel slot IDs remain untouched.
+- Normal AE2 interactions remain owned by AE2; Stack64's dedicated AE2 amount
+  request continues to identify entries by AE2 serial rather than menu index.
+- Protocol 10 requires the same 1.2.8 jar on client and server.
+- Added four boundary tests for valid, invalid, sentinel, and empty-menu slot
+  ranges.
+
 ## 1.2.7
 
 ### Fixed

@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
 Specification-Title: stack64_taker
 Implementation-Title: Stack64 Taker
-Implementation-Version: 1.2.4
+Implementation-Version: 1.2.8
 MixinConfigs: stack64_taker.mixins.json
