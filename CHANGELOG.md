@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.2.9
+
+### Fixed
+
+- Bypassed the container click boundary guard for AE2/AE2WTLib menus so AE2 GUI and EMI transfer actions are no longer blocked by false boundary validation.
+- Kept the existing anti-invalid-click protection for non-AE GUIs unchanged.
+- Preserved prior server/client slot synchronization throttling and logging safeguards.
+
 ## 1.2.8
 
 ### Fixed

@@ -59,7 +59,7 @@ public abstract class ServerClickGuardMixin {
 
         AbstractContainerMenu menu = player.containerMenu;
         if (packet.getContainerId() != menu.containerId
-                || !ContainerClickBounds.isInvalid(slotId, menu.slots.size())) {
+                || !ContainerClickBounds.isInvalid(slotId, menu.slots.size(), menu)) {
             return;
         }
 

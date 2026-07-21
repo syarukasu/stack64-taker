@@ -34,7 +34,7 @@ public abstract class AbstractContainerMenuClickGuardMixin {
             Player player,
             CallbackInfo ci) {
         AbstractContainerMenu menu = (AbstractContainerMenu) (Object) this;
-        if (!ContainerClickBounds.isInvalid(slotId, menu.slots.size())) {
+        if (!ContainerClickBounds.isInvalid(slotId, menu.slots.size(), menu)) {
             return;
         }
 
