@@ -51,7 +51,7 @@ public abstract class ClientContainerClickGuardMixin {
         if (menu == null
                 || player.containerMenu != menu
                 || containerId != menu.containerId
-                || !ContainerClickBounds.isInvalid(slotId, menu.slots.size())) {
+                || !ContainerClickBounds.isInvalid(slotId, menu.slots.size(), menu)) {
             return;
         }
 
