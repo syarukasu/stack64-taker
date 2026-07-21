@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.2.10
+
+### Changed
+
+- 限定的例外化に変更: 旧来の「appeng.menu.* 全体」を避け、`appeng.menu.me.*`（ME/ターミナル系）と AE2WTLib メニューのみを境界ガード対象外に。
+- `appeng.menu.implementations.*` など通常の実体スロットGUIは従来どおりの境界ガードを維持。
+
+### Safety
+
+- 通常GUIでの不正スロットクリック防止は従来どおり維持。
+- MEターミナル/ME系の仮想スロット操作はAE2側の処理に委譲。
+
 ## 1.2.9
 
 ### Fixed
