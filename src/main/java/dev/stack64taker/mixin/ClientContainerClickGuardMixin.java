@@ -3,6 +3,7 @@ package dev.stack64taker.mixin;
 import java.util.concurrent.TimeUnit;
 
 import dev.stack64taker.ContainerClickBounds;
+import dev.stack64taker.client.Ae2ClientClickBridge;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -52,6 +53,16 @@ public abstract class ClientContainerClickGuardMixin {
                 || player.containerMenu != menu
                 || containerId != menu.containerId
                 || !ContainerClickBounds.isInvalid(slotId, menu.slots.size(), menu)) {
+            return;
+        }
+
+        /*
+         * Issue #2: AE2 RepoSlotはmenu.slotsに存在しない表示専用Slotである。
+         * 範囲外packetを許可するのではなく、実RepoSlot操作だけAE2の専用Interactionへ変換する。
+         */
+        if (Ae2ClientClickBridge.handleVirtualSlot(
+                containerScreen, menu, button, clickType, player)) {
+            ci.cancel();
             return;
         }
 
