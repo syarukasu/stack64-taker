@@ -2,15 +2,18 @@
 
 ## 1.2.10
 
-### Changed
+### Fixed
 
-- 限定的例外化に変更: 旧来の「appeng.menu.* 全体」を避け、`appeng.menu.me.*`（ME/ターミナル系）と AE2WTLib メニューのみを境界ガード対象外に。
-- `appeng.menu.implementations.*` など通常の実体スロットGUIは従来どおりの境界ガードを維持。
+- AE2の仮想`RepoSlot`クリックだけを、AE2標準の`InventoryAction`と
+  `MEStorageMenu.handleInteraction`へ転送するように変更。
+- AE2メニュー全体を境界ガードの例外にする実装を廃止。
+- 通常スロットとサーバー側クリック境界検証は従来どおり維持。
 
 ### Safety
 
 - 通常GUIでの不正スロットクリック防止は従来どおり維持。
-- MEターミナル/ME系の仮想スロット操作はAE2側の処理に委譲。
+- 実際にホバー中の`RepoSlot`かつ`MEStorageMenu`の場合だけAE2へ委譲。
+- AE2以外のGUI、AE2の実体スロット、空白部分は専用転送の対象外。
 
 ## 1.2.9
 
