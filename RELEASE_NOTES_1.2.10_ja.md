@@ -2,6 +2,8 @@
 
 #### 変更
 
-- AE2例外化を広すぎる実装から縮小しました。
-- スロット境界ガードの例外は、`appeng.menu.me.*` 系（ME/ターミナル系）と AE2WTLib メニューのみに限定。
-- `appeng.menu.implementations.*` などの通常実体スロットGUIでは従来どおり不正クリック検知を維持します。
+- AE2の仮想`RepoSlot`クリックだけを、AE2標準の`InventoryAction`と
+  `MEStorageMenu.handleInteraction`へ転送します。
+- AE2メニュー全体をコンテナクリック検証から除外する処理は使用しません。
+- 通常スロット、空白部分、AE2以外のGUI、サーバー側クリック境界検証は
+  従来どおり保護されます。
